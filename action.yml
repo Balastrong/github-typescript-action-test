@@ -1,0 +1,7 @@
+name: "Gh Action Test"
+description: "Test Github Action"
+author: "Leonrdo Montini"
+
+runs:
+  using: "node16"
+  main: "index.js"
