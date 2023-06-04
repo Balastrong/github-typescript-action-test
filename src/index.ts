@@ -9,16 +9,18 @@ async function run() {
   const pullRequest = context.payload.pull_request;
 
   try {
+    if (!pullRequest) {
+      throw new Error("This action can only be run on Pull Requests");
+    }
+
     await octokit.rest.issues.addLabels({
       owner: context.repo.owner,
       repo: context.repo.repo,
-      issue_number: pullRequest!.number,
+      issue_number: pullRequest.number,
       labels: [label],
     });
   } catch (error) {
-    if (error instanceof Error) {
-      setFailed(error?.message ?? "Unknown error");
-    }
+    setFailed((error as Error)?.message ?? "Unknown error");
   }
 }
 
