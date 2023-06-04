@@ -9818,7 +9818,10 @@ async function run() {
     }
 }
 exports.run = run;
-run();
+// istanbul ignore next
+if (!process.env.JEST_WORKER_ID) {
+    run();
+}
 
 })();
 
